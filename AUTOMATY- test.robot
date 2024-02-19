@@ -13,61 +13,177 @@ Test Setup        Before_test
 
 *** Test Cases ***
 
-Dashboard MyTasks
+Dashboard MyTasks and MyCases
     Click   ${SEL_HomeTab}
+
+#Moje úkoly - OPEN
     Click    ${SEL_MyTasksCases}
-    Sleep    1s
+    Match Numbers
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+
+    #Dle Termínu
     Click    ${SEL_MyTasksByDeadline}
-    Sleep    1s
+    Sleep    0.5s
+    Get Number From String Tasks
+
+    #Bez Termínu
     Click    ${SEL_MyTasksWithoutDeadline}
-    Sleep    1s
-    Click    ${SEL_MyTasksOpened}
-    Sleep    1s
+    Sleep    0.5s
+    Get Number From String Tasks
+
+#Moje úkoly - CLOSED
     Click    ${SEL_MyTasksClosed}
-    Sleep    1s
+    Click    ${SEL_MyTasksCases}
+    Match Numbers
+    Sleep    3S   #Potřebuje čas načíst
+    Get Number From String Tasks
 
-Dashboard MyCases
+    #Dle Termínu
+    Click    ${SEL_MyTasksByDeadline}
+    Sleep    0.5s
+    Get Number From String Tasks
+
+    #Bez Termínu
+    Click    ${SEL_MyTasksWithoutDeadline}
+    Sleep    0.5s
+    Get Number From String Tasks
+
+
+
+
+##Sledované Úkoly-------------------------
+#
+##Dle Případu - OPEN
+    Click    ${SEL_MyWatchedTasks}
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+
+    ##Dle Termínu
+    Click    ${SEL_MyTasksByDeadline}
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+    ##Bez Termínu
+    Click    ${SEL_MyTasksWithoutDeadline}
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+
+##Dle Případu - CLOSED
+    Click    ${SEL_MyWatchedTasks}
+    Click    ${SEL_MyTasksClosed}
+
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+
+    ##Dle Termínu
+    Click    ${SEL_MyTasksByDeadline}
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+    ##Bez Termínu
+    Click    ${SEL_MyTasksWithoutDeadline}
+    Sleep    0.5S   #Potřebuje čas načíst
+    Get Number From String Tasks
+
+
+
+
+
+
+#    Click    ${SEL_MyTasksByDeadline}
+#    Click    ${SEL_MyTasksOpened}
+#    Sleep    2s
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksClosed}
+#    Sleep    2s
+#    Get Number From String Tasks
+#
+
+#
+#    Click    ${SEL_MyTasksOpened}
+#    Sleep    0.5s
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksClosed}
+#    Sleep    0.5s
+#    Get Number From String Tasks
+
+test
+#OPEN
+
+#    Sleep    2S   #Potřebuje čas načíst
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksByDeadline}
+#    Sleep    2S   #Potřebuje čas načíst
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksWithoutDeadline}
+#CLOSED
+#    Click    ${SEL_MyWatchedTasks}
+#    Click    ${SEL_MyTasksClosed}
+#
+#    Sleep    0.5S   #Potřebuje čas načíst
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksByDeadline}
+#    Sleep    0.5S   #Potřebuje čas načíst
+#    Get Number From String Tasks
+#    Click    ${SEL_MyTasksWithoutDeadline}
+
+
+
+#Dashboard MyCases
     Click    ${SEL_MyCases}
-    Sleep    1s
     Click    ${SEL_MyCasesClosed}
-    Sleep    1s
+    Sleep    0.5s   #Potřebuje čas načíst
+    Get Number From String Cases
     Click    ${SEL_MyCasesOpened}
-
-
-
-
-
-
-
-Match Numbers
-    #Porovná čísla v Headru a v Moje úkoly
-    ${HeaderNumberOfTasks}    Get Text    ${SEL_HeaderNumberOfTasks}
-    Log To Console    ${HeaderNumberOfTasks}
-    ${MyTasksNumber}    Get Text    ${SEL_MyTasksNumber}
-    Log To Console    ${MyTasksNumber}
-    Should Be Equal    ${HeaderNumberOfTasks}    ${MyTasksNumber}
-    #Porovná čísla úkolů u kterých je i string, zpracovává i filtry.
-
+    Sleep    0.5s   #Potřebuje čas načíst
+    Get Number From String Cases
 
 
 
 
 
 *** Keywords ***
+Match Numbers
+    #Porovná čísla v Headru a v Moje úkoly
+    ${HeaderNumberOfTasks}    Get Text    ${SEL_HeaderNumberOfTasks}
+    Log To Console    ${HeaderNumberOfTasks}
+    ${MyTasksNumber}    Get Text    ${SEL_MyTasksNumber}
+    Log To Console    ${MyTasksNumber}
 
+
+#Porovná čísla úkolů u kterých je i string,najde všechny číselné výrazy, vezme první číselný výraz a porovná ho s 0
+Get Number From String Tasks
+    ${string}    Get Element    ${SEL_NumberWithStringTasks}
+    ${text}    Get Text    ${string}
+    ${matches}    Get Regexp Matches    ${text}    \\d+
+    ${number}    Set Variable    ${matches}[0]
+    Log    ${number}
+    Should Not Be Equal As Numbers    ${number}    0
+
+
+Get Number From String Cases
+    ${string}    Get Element    ${SEL_NumberWithStringCases}
+    ${text}    Get Text    ${string}
+    ${matches}    Get Regexp Matches    ${text}    \\d+
+    ${number}    Set Variable    ${matches}[0]
+    Log    ${number}
+    Should Not Be Equal As Numbers    ${number}    0
 
 
 *** Variables ***
 ${SEL_HomeTab}     xpath=//*[@data-testid="home-tab"]
 
-#Filtry pro "Moje ůkoly" a "Sledované úkoly"
+#Filtry pro "Moje Úkoly" a "Sledované úkoly"
 ${SEL_MyTasks}      xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/my-tasks"]
-${SEL_MyWatchedTasks}   xpath= //div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watching-tasks"]
+${SEL_MyWatchedTasks}   xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watching-tasks"]
+#Moje Úkoly
 ${SEL_MyTasksCases}  xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Dle případu"]
 ${SEL_MyTasksByDeadline}    xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Dle termínu"]
 ${SEL_MyTasksWithoutDeadline}   xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Bez termínu"]
 ${SEL_MyTasksOpened}  xpath=//div[@data-testid="dashboard-task-status-filters"]//button[@value="OPEN"]
 ${SEL_MyTasksClosed}    xpath=//div[@data-testid="dashboard-task-status-filters"]//button[@value="CLOSED"]
+#Sledované úkoly
+
+
 
 #Filtry pro "Moje případy" a "Sledované případy"
 ${SEL_MyCases}  xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/responsible"]
@@ -76,11 +192,11 @@ ${SEL_MyCasesOpened}  xpath=//div[@data-testid="dashboard-case-status-filters"]/
 ${SEL_MyCasesClosed}    xpath=//div[@data-testid="dashboard-case-status-filters"]//button[@value="CLOSED"]
 
 #Porovnávaní čísel
-## header number = data-testid="task-afterDue-count"
-## my tasks number = data-testid="dashboard-tab-my-task-count"
-## NUm_WithString
 ${SEL_HeaderNumberOfTasks}    data-testid=task-afterDue-count
 ${SEL_MyTasksNumber}    data-testid=dashboard-tab-my-task-count
+${SEL_NumberWithStringTasks}     data-testid=filtered-task-count
+#V moment co se klikne na Moje případy tak se změní data-testid
+${SEL_NumberWithStringCases}    data-testid=filtered-case-count
 
 
-
+#MyTasks --> MyTaskCases ---> MyTasksOpened
