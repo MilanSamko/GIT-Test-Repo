@@ -15,7 +15,7 @@ Test Setup        Before_test
 Dashboard MyTasks and MyCases
     Click   ${SEL_HomeTab}
 #   Moje Úkoly----------------------------------------------------------------------------------------------------------
-
+#
 #   Moje úkoly - OPENED
 #   Dle případu
     Click    ${SEL_MyTasksCases}
