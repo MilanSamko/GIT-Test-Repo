@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation
-Library  Browser
+Library     Browser
 Library     String
 
 Resource    ../Data/Configuration.robot
@@ -10,193 +10,186 @@ Resource    ../Data/Keywords_BL.robot
 Suite Setup       Before_suite
 Test Setup        Before_test
 
-
 *** Test Cases ***
 
 Dashboard MyTasks and MyCases
     Click   ${SEL_HomeTab}
+#   Moje Úkoly----------------------------------------------------------------------------------------------------------
 
-#Moje úkoly - OPEN
+#   Moje úkoly - OPENED
+#   Dle případu
     Click    ${SEL_MyTasksCases}
+
     Match Numbers
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasks}
     Get Number From String Tasks
 
-    #Dle Termínu
+#   Dle Termínu
     Click    ${SEL_MyTasksByDeadline}
-    Sleep    0.5s
+    Wait For Elements State    ${SEL_ListTasks}
     Get Number From String Tasks
 
-    #Bez Termínu
+#   Bez Termínu
     Click    ${SEL_MyTasksWithoutDeadline}
-    Sleep    0.5s
+    Wait For Elements State    ${SEL_ListTasks}
     Get Number From String Tasks
 
-#Moje úkoly - CLOSED
+#   Moje úkoly - CLOSED
+#   Dle případu
     Click    ${SEL_MyTasksClosed}
     Click    ${SEL_MyTasksCases}
-    Match Numbers
-    Sleep    3S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasks}
     Get Number From String Tasks
 
-    #Dle Termínu
+#   Dle Termínu
     Click    ${SEL_MyTasksByDeadline}
-    Sleep    0.5s
+    Wait For Elements State    ${SEL_ListTasks}
     Get Number From String Tasks
 
-    #Bez Termínu
+#   Bez Termínu
     Click    ${SEL_MyTasksWithoutDeadline}
-    Sleep    0.5s
+    Wait For Elements State    ${SEL_ListTasks}
+    Get Number From String Tasks
+    Verify Breadcrumbs Text     Moje úkoly
+
+#   Moje Sledované Úkoly------------------------------------------------------------------------------------------------
+
+#   Dle Případu - OPENED
+    Click    ${SEL_MyWatchingTasks}
+    Wait For Navigation    https://test.eucs.online/dashboard/watching-tasks    wait_until=load
+    Click    ${SEL_MyTasksCases}
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
 
-
-
-
-##Sledované Úkoly-------------------------
-#
-##Dle Případu - OPEN
-    Click    ${SEL_MyWatchedTasks}
-    Sleep    0.5S   #Potřebuje čas načíst
-    Get Number From String Tasks
-
-    ##Dle Termínu
+#   Dle Termínu
     Click    ${SEL_MyTasksByDeadline}
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
+
     ##Bez Termínu
     Click    ${SEL_MyTasksWithoutDeadline}
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
 
-##Dle Případu - CLOSED
-    Click    ${SEL_MyWatchedTasks}
+#   Dle Případu - CLOSED
+    Click    ${SEL_MyTasksCases}
     Click    ${SEL_MyTasksClosed}
-
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
 
-    ##Dle Termínu
+#   Dle Termínu
     Click    ${SEL_MyTasksByDeadline}
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
-    ##Bez Termínu
+
+#   Bez Termínu
     Click    ${SEL_MyTasksWithoutDeadline}
-    Sleep    0.5S   #Potřebuje čas načíst
+    Wait For Elements State    ${SEL_ListTasksWatched}
     Get Number From String Tasks
+    Verify Breadcrumbs Text     Sledované úkoly
 
+#   Moje Případy--------------------------------------------------------------------------------------------------------
+#   Tady se není nic krom list, ten je jediný na který se dá odkazovat při načítáni obsahu "Wait for elements state" ,   Ten někdy načte ryhle někdy pomalu,
+#   to způsobuje že občas test projde občasa ne. Řešeno provizorně pomocí "Sleep 2s"
+#   POZN. Mužu do Wait For Elements State dát více SEL_ektorů ? V jaké závislosti se bude hodnotit stav selektoru.
 
+#   Dashboard Moje případy -OPENED
 
-
-
-
-#    Click    ${SEL_MyTasksByDeadline}
-#    Click    ${SEL_MyTasksOpened}
-#    Sleep    2s
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksClosed}
-#    Sleep    2s
-#    Get Number From String Tasks
-#
-
-#
-#    Click    ${SEL_MyTasksOpened}
-#    Sleep    0.5s
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksClosed}
-#    Sleep    0.5s
-#    Get Number From String Tasks
-
-test
-#OPEN
-
-#    Sleep    2S   #Potřebuje čas načíst
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksByDeadline}
-#    Sleep    2S   #Potřebuje čas načíst
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksWithoutDeadline}
-#CLOSED
-#    Click    ${SEL_MyWatchedTasks}
-#    Click    ${SEL_MyTasksClosed}
-#
-#    Sleep    0.5S   #Potřebuje čas načíst
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksByDeadline}
-#    Sleep    0.5S   #Potřebuje čas načíst
-#    Get Number From String Tasks
-#    Click    ${SEL_MyTasksWithoutDeadline}
-
-
-
-#Dashboard MyCases
     Click    ${SEL_MyCases}
+    Sleep    2s
+    Get Number From String Cases
+
+#   Dashboard Moje případy -CLOSED
     Click    ${SEL_MyCasesClosed}
-    Sleep    0.5s   #Potřebuje čas načíst
+    Sleep    2s
     Get Number From String Cases
-    Click    ${SEL_MyCasesOpened}
-    Sleep    0.5s   #Potřebuje čas načíst
+    Verify Breadcrumbs Text     Moje případy
+#   Sledované případy----------------------------------------------------------------------------------------------
+
+#   My WathchedCases -OPENED
+    Click    ${SEL_MyWatchedCases}
+    Wait For Elements State    ${SEL_ListCasesMyWathchedCases}
     Get Number From String Cases
 
-
+#   My WathchedCases -CLOSED
+    Click    ${SEL_MyCasesClosed}
+    Verify Breadcrumbs Text     Sledované případy
+    Get Number From String Cases
 
 
 
 *** Keywords ***
 Match Numbers
-    #Porovná čísla v Headru a v Moje úkoly
+#   Porovná čísla v Headru a v Moje úkoly
     ${HeaderNumberOfTasks}    Get Text    ${SEL_HeaderNumberOfTasks}
     Log To Console    ${HeaderNumberOfTasks}
     ${MyTasksNumber}    Get Text    ${SEL_MyTasksNumber}
     Log To Console    ${MyTasksNumber}
 
-
-#Porovná čísla úkolů u kterých je i string,najde všechny číselné výrazy, vezme první číselný výraz a porovná ho s 0
+#   Porovná string s 0
 Get Number From String Tasks
-    ${string}    Get Element    ${SEL_NumberWithStringTasks}
-    ${text}    Get Text    ${string}
-    ${matches}    Get Regexp Matches    ${text}    \\d+
-    ${number}    Set Variable    ${matches}[0]
-    Log    ${number}
-    Should Not Be Equal As Numbers    ${number}    0
 
+    ${string}   Get Text    ${SEL_NumberOfStringTasks}
+    ${matches}    Get Regexp Matches    ${string}    \\d+
+    ${number}    Set Variable    ${matches}[0]
+    Log To Console      ${number}
+    Should Not Be Equal As Numbers    ${number}    0
 
 Get Number From String Cases
-    ${string}    Get Element    ${SEL_NumberWithStringCases}
-    ${text}    Get Text    ${string}
-    ${matches}    Get Regexp Matches    ${text}    \\d+
+#    Sleep    2s ---- alternativní možnost
+    ${string}   Get Text    ${SEL_NumberOfStringCases}
+    ${matches}    Get Regexp Matches    ${string}    \\d+
     ${number}    Set Variable    ${matches}[0]
-    Log    ${number}
+    Log To Console      ${number}
     Should Not Be Equal As Numbers    ${number}    0
+
+
+#   Ověřuje text drobečkové navigace, ta je v kodu vždy až na konci ať se stihne načít správný název.
+Verify Breadcrumbs Text
+    [Arguments]    ${TextForBreadcrumbs}
+    ${Breadcumbstext}    Get Text   ${SEL_DashBoardBreadcrumbs}
+    Should Be Equal   ${Breadcumbstext}       ${TextForBreadcrumbs}
+    Log To Console     Breadcrumbs Status OK... ${Breadcumbstext}
 
 
 *** Variables ***
-${SEL_HomeTab}     xpath=//*[@data-testid="home-tab"]
+${SEL_HomeTab}     data-testid=home-tab
 
-#Filtry pro "Moje Úkoly" a "Sledované úkoly"
+#   Filtry pro "Moje Úkoly" a "Sledované úkoly"
 ${SEL_MyTasks}      xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/my-tasks"]
-${SEL_MyWatchedTasks}   xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watching-tasks"]
-#Moje Úkoly
+${SEL_MyWatchingTasks}   xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watching-tasks"]
+
+#   Tlačítka Filry
+##   Task
 ${SEL_MyTasksCases}  xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Dle případu"]
 ${SEL_MyTasksByDeadline}    xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Dle termínu"]
 ${SEL_MyTasksWithoutDeadline}   xpath=//div[@data-testid="dashboard-task-data-filters"]//button[text()="Bez termínu"]
 ${SEL_MyTasksOpened}  xpath=//div[@data-testid="dashboard-task-status-filters"]//button[@value="OPEN"]
 ${SEL_MyTasksClosed}    xpath=//div[@data-testid="dashboard-task-status-filters"]//button[@value="CLOSED"]
-#Sledované úkoly
+##   Cases
+${SEL_MyCasesOpened}  xpath=//div[@data-testid="dashboard-case-status-filters"]/button[@value="CREATED"]
+${SEL_MyCasesClosed}    xpath=//div[@data-testid="dashboard-case-status-filters"]/button[@value="CLOSED"]
 
-
-
-#Filtry pro "Moje případy" a "Sledované případy"
+#   Filtry pro "Moje případy" a "Sledované případy"
 ${SEL_MyCases}  xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/responsible"]
-${SEL_MyTrackedCases}   xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watcher"]
-${SEL_MyCasesOpened}  xpath=//div[@data-testid="dashboard-case-status-filters"]//button[@value="CREATED"]
-${SEL_MyCasesClosed}    xpath=//div[@data-testid="dashboard-case-status-filters"]//button[@value="CLOSED"]
+${SEL_MyWatchedCases}   xpath=//div[@data-testid="dashboard-tab-list"]//a[@href="/dashboard/watcher"]
 
-#Porovnávaní čísel
+#   Porovnávaní čísel
 ${SEL_HeaderNumberOfTasks}    data-testid=task-afterDue-count
 ${SEL_MyTasksNumber}    data-testid=dashboard-tab-my-task-count
-${SEL_NumberWithStringTasks}     data-testid=filtered-task-count
-#V moment co se klikne na Moje případy tak se změní data-testid
-${SEL_NumberWithStringCases}    data-testid=filtered-case-count
+${SEL_NumberOfStringTasks}     data-testid=filtered-task-count
+${SEL_NumberOfStringCases}    data-testid=filtered-case-count
 
+#   Počká než se načte list
+${SEL_ListTasks}    xpath=//div[@class="MuiStack-root css-18zsr3k"]
+${SEL_ListTasksWatched}  xpath=//div[@class="MuiStack-root css-18zsr3k"]
+${SEL_ListCases}     xpath=//div[@class="MuiStack-root css-yqp7p1"]
+${SEL_ListCasesWatched}     xpath=//div[@class="MuiStack-root css-yqp7p1"]
+${SEL_ListCasesWatchedList}    xpath=//div[@class="MuiStack-root css-yqp7p1"]  #class="MuiStack-root css-yqp7p1"
+${SEL_ListCasesMyCases}        xpath=//ul[@class="MuiList-root MuiList-padding css-1ontqvh"]
+${SEL_ListCasesMyCasesClosed}   xpath=//ul[@class="MuiList-root MuiList-padding css-1ontqvh"]
+${SEL_ListCasesMyWathchedCases}   xpath=//div[@class="MuiStack-root css-yqp7p1"]/nav[@aria-label="pagination navigation"]
 
-#MyTasks --> MyTaskCases ---> MyTasksOpened
+#   Drobečková navigace fix
+${SEL_DashboardBreadcrumbs}    xpath=//li[@class="MuiBreadcrumbs-li"]/div[@data-testid="breadcrumbs-translation-2"]
+
