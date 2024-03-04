@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.1 on win32)" generated="2024-02-19T12:45:09.335960" rpa="false" schemaversion="5">
+<suite id="s1" name="TESTFILE" source="C:\Users\Milan\PycharmProjects\GIT-Test-Repo\TESTFILE.robot">
+<kw name="Before_suite" type="SETUP">
+<msg time="2024-02-19T12:45:10.816231" level="FAIL">No keyword with name 'Before_suite' found.</msg>
+<status status="FAIL" start="2024-02-19T12:45:10.816231" elapsed="0.000000">No keyword with name 'Before_suite' found.</status>
+</kw>
+<test id="s1-t1" name="Dashboard MyTasks and MyCases" line="16">
+<status status="FAIL" start="2024-02-19T12:45:10.816231" elapsed="0.003368">Parent suite setup failed:
+No keyword with name 'Before_suite' found.</status>
+</test>
+<status status="FAIL" start="2024-02-19T12:45:09.339292" elapsed="1.514152">Suite setup failed:
+No keyword with name 'Before_suite' found.</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="TESTFILE">TESTFILE</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-02-19T12:45:09.665202" level="ERROR">Error in file 'C:\Users\Milan\PycharmProjects\GIT-Test-Repo\TESTFILE.robot' on line 6: Resource file 'Data\Configuration.robot' does not exist.</msg>
+<msg time="2024-02-19T12:45:09.669688" level="ERROR">Error in file 'C:\Users\Milan\PycharmProjects\GIT-Test-Repo\TESTFILE.robot' on line 7: Resource file 'Data\TestData.robot' does not exist.</msg>
+<msg time="2024-02-19T12:45:09.672060" level="ERROR">Error in file 'C:\Users\Milan\PycharmProjects\GIT-Test-Repo\TESTFILE.robot' on line 8: Resource file 'Data\Keywords_BL.robot' does not exist.</msg>
+</errors>
+</robot>

@@ -1,0 +1,27 @@
+{"level":30,"time":"2024-02-19T11:45:10.433Z","pid":15604,"hostname":"Milan-Windows10","msg":"Listening on 55112"}
+{"level":30,"time":"2024-02-19T11:45:10.811Z","pid":15604,"hostname":"Milan-Windows10","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:10.812Z","pid":15604,"hostname":"Milan-Windows10","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:10.818Z","pid":15604,"hostname":"Milan-Windows10","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:10.818Z","pid":15604,"hostname":"Milan-Windows10","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:9968:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10588:59)
+    at PlaywrightServer.setTimeout (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10838:57)
+    at handleUnary (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:852:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+=============================================================
+{"level":30,"time":"2024-02-19T11:45:10.851Z","pid":15604,"hostname":"Milan-Windows10","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:10.852Z","pid":15604,"hostname":"Milan-Windows10","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:9968:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10588:59)
+    at PlaywrightServer.setTimeout (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js:10838:57)
+    at handleUnary (C:\Users\Milan\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:852:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+=============================================================
+{"level":30,"time":"2024-02-19T11:45:10.882Z","pid":15604,"hostname":"Milan-Windows10","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:10.882Z","pid":15604,"hostname":"Milan-Windows10","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2024-02-19T11:45:12.953Z","pid":15604,"hostname":"Milan-Windows10","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2024-02-19T11:45:12.953Z","pid":15604,"hostname":"Milan-Windows10","msg":"End of node method closeAllBrowsers"}
